@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: workflow-controller-configmap
+data:
+  # Default values that will apply to all Workflows from this controller, unless overridden on the Workflow-level
+  workflowDefaults: |
+   spec:
+     securityContext:
+       seccompProfile:
+         type: RuntimeDefault
+       runAsNonRoot: true
+       fsGroupChangePolicy: OnRootMismatch
+       runAsUser: 1000
+     podSpecPatch: |
+       initContainers:
+       - name: init
+         securityContext:
+           allowPrivilegeEscalation: false
+           capabilities:
+             drop:
+             - ALL
+       containers:
+       - name: main
+         securityContext:
+           allowPrivilegeEscalation: false
+           capabilities:
+             drop:
+             - ALL
+       - name: wait
+         securityContext:
+           allowPrivilegeEscalation: false
+           capabilities:
+             drop:
+             - ALL
