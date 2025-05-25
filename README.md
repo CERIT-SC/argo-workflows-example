@@ -19,7 +19,7 @@ This demo is minimal and intended for learning and experimentation purposes. It 
 Apply the manifests located in the `controller-manifests` directory:
 
 ```
-kubectl apply -f controller-manifests/
+kubectl apply -f controller-manifests/ -n [your-namespace]
 ```
 
 > **Note:** You may want to modify the `workflow-controller-configmap.yaml` file to fit your specific requirements. The provided configuration only sets the required `securityContext`.
